@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS `record` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `record` varchar(64) NOT NULL COMMENT '记录',
+  PRIMARY KEY (`id`)
+) AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COMMENT = '记录测试表'
+;
+
+CREATE TABLE IF NOT EXISTS `counter` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `counter` int NOT NULL COMMENT '计数值',
+  PRIMARY KEY (`id`)
+) AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COMMENT = '计数器表'
+;
