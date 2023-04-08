@@ -63,6 +63,36 @@ public class OssServiceImpl implements OssService {
     }
 
     /**
+     * 上传文件
+     *
+     * @param bytes    文件字节码
+     * @param fileName OSS文件名称
+     * @param filePath OSS文件名称
+     * @return {@link AlipayOpenMiniCloudFileUploadResponse}
+     */
+    @Override
+    public AlipayOpenMiniCloudFileUploadResponse uploadFile(byte[] bytes, String fileName, String filePath) {
+
+        log.info("upload file bytes to alipay cloudrun oss, fileName = {}, filePath = {}", fileName, filePath);
+        AlipayClient alipayClient = new DefaultAlipayClient(PublicConstant.SERVER_URL, PublicConstant.APP_ID,
+                PublicConstant.PRIVATE_KEY, "json", "utf-8", PublicConstant.PUBLIC_KEY, "RSA2");
+        AlipayOpenMiniCloudFileUploadRequest request = new AlipayOpenMiniCloudFileUploadRequest();
+        request.setCloudId(PublicConstant.ENV_ID);
+        request.setType("File");
+        request.setPath(filePath);
+        request.setFileName(fileName);
+        request.setFileContent(new FileItem(fileName, bytes));
+        try {
+            AlipayOpenMiniCloudFileUploadResponse response = alipayClient.execute(request);
+            return response;
+        } catch (AlipayApiException e) {
+            log.error("upload file fail, AlipayApiException", e);
+            throw new RuntimeException(e.getMessage(), e);
+        }
+
+    }
+
+    /**
      * 列举文件
      *
      * @param path    文件路径
@@ -140,6 +170,7 @@ public class OssServiceImpl implements OssService {
         bizContent.put("cloud_id", PublicConstant.ENV_ID);
         bizContent.put("path", path);
         bizContent.put("file_name_list", fileNameList);
+        request.setBizContent(bizContent.toJSONString());
         try {
             AlipayOpenMiniCloudFileDeleteResponse response = alipayClient.execute(request);
             return response;

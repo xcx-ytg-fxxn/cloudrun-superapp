@@ -28,6 +28,16 @@ public interface OssService {
     AlipayOpenMiniCloudFileUploadResponse uploadFile(String localFile, String fileName, String filePath);
 
     /**
+     * 上传文件
+     *
+     * @param bytes    文件字节码
+     * @param fileName OSS文件名称
+     * @param filePath OSS文件名称
+     * @return {@link AlipayOpenMiniCloudFileUploadResponse}
+     */
+    AlipayOpenMiniCloudFileUploadResponse uploadFile(byte[] bytes, String fileName, String filePath);
+
+    /**
      * 列举文件
      *
      * @param path      文件路径

@@ -35,7 +35,7 @@ public class PublicConstant {
      * 公钥
      *
      */
-    public static final String PUBLIC_KEY = System.getenv("APP_PUBLIC_KEY");
+    public static final String PUBLIC_KEY = System.getenv("ALIPAY_PUBLIC_KEY");
 
 
 }

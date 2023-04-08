@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -40,21 +39,16 @@ public class OssTestController {
      * @return {@link Result}<{@link AlipayOpenMiniCloudFileUploadResponse}>
      */
     @PostMapping("/upload")
-    public Result<AlipayOpenMiniCloudFileUploadResponse> uploadFile(@RequestParam("file")MultipartFile file,
-                                                                    @RequestParam("path") String path) throws IOException {
+    public Result<AlipayOpenMiniCloudFileUploadResponse> uploadFile(@RequestParam("file") MultipartFile file,
+                                                                    @RequestParam(name = "path", required = false) String path) throws IOException {
         log.info("/api/oss/upload POST request, fileName = {}, path = {}", file.getOriginalFilename(), path);
         if (path.trim().isEmpty()) {
             path = "/temp/";
         }
         String fileName = file.getOriginalFilename();
-        //生成带时间戳的文件名 防止文件名重复
-        String randomFileName = System.currentTimeMillis() + fileName;
-        //本地临时保存文件路径
-        String localPath = "/tmp/upload/" + randomFileName;
-        File targetFile = new File(localPath);
-        file.transferTo(targetFile);
-        AlipayOpenMiniCloudFileUploadResponse response = ossService.uploadFile(localPath, randomFileName, path);
-        targetFile.delete();
+        //生成带时间戳的文件名 防止文件名重复时上传失败
+        String randomFileName = System.currentTimeMillis() + "_"+ fileName;
+        AlipayOpenMiniCloudFileUploadResponse response = ossService.uploadFile(file.getBytes(), randomFileName, path);
         return Result.success(response);
 
     }
@@ -67,7 +61,7 @@ public class OssTestController {
      * @return {@link Result}<{@link AlipayOpenMiniCloudFilelistQueryResponse}>
      */
     @GetMapping("/list")
-    public Result<AlipayOpenMiniCloudFilelistQueryResponse> queryFileList(@RequestParam("path") String path,
+    public Result<AlipayOpenMiniCloudFilelistQueryResponse> queryFileList(@RequestParam(name = "path", required = false) String path,
                                                                           @RequestParam(name = "nextToken",required = false) String nextToken) {
         log.info("/api/oss/list GET request, path = {}, nextToken = {}", path, nextToken);
         if (path == null || path.trim().isEmpty()) {
