@@ -17,6 +17,8 @@ import com.alipay.api.response.AlipayOpenMiniCloudFileDeleteResponse;
 import com.alipay.api.response.AlipayOpenMiniCloudFileQueryResponse;
 import com.alipay.api.response.AlipayOpenMiniCloudFileUploadResponse;
 import com.alipay.api.response.AlipayOpenMiniCloudFilelistQueryResponse;
+import com.alipay.cloudrun.superapp.model.exception.AppException;
+import com.alipay.cloudrun.superapp.model.exception.AppExceptionCodeEnum;
 import com.alipay.cloudrun.superapp.service.OssService;
 import com.alipay.cloudrun.superapp.util.PublicConstant;
 import lombok.extern.log4j.Log4j2;
@@ -57,7 +59,7 @@ public class OssServiceImpl implements OssService {
             return response;
         } catch (AlipayApiException e) {
             log.error("upload file fail, AlipayApiException", e);
-            throw new RuntimeException(e.getMessage(), e);
+            throw new AppException(AppExceptionCodeEnum.OSS_ERROR, e.getMessage(), e);
         }
 
     }
@@ -87,7 +89,7 @@ public class OssServiceImpl implements OssService {
             return response;
         } catch (AlipayApiException e) {
             log.error("upload file fail, AlipayApiException", e);
-            throw new RuntimeException(e.getMessage(), e);
+            throw new AppException(AppExceptionCodeEnum.OSS_ERROR, e.getMessage(), e);
         }
 
     }
@@ -118,7 +120,7 @@ public class OssServiceImpl implements OssService {
             return response;
         } catch (AlipayApiException e) {
             log.error("query file list fail, AlipayApiException", e);
-            throw new RuntimeException(e.getMessage(), e);
+            throw new AppException(AppExceptionCodeEnum.OSS_ERROR, e.getMessage(), e);
         }
 
     }
@@ -145,7 +147,7 @@ public class OssServiceImpl implements OssService {
             return response;
         } catch (AlipayApiException e) {
             log.error("query file info fail, AlipayApiException", e);
-            throw new RuntimeException(e.getMessage(), e);
+            throw new AppException(AppExceptionCodeEnum.OSS_ERROR, e.getMessage(), e);
         }
     }
 
@@ -176,7 +178,7 @@ public class OssServiceImpl implements OssService {
             return response;
         } catch (AlipayApiException e) {
             log.error("delete file info fail, AlipayApiException", e);
-            throw new RuntimeException(e.getMessage(), e);
+            throw new AppException(AppExceptionCodeEnum.OSS_ERROR, e.getMessage(), e);
         }
 
     }
