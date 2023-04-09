@@ -8,6 +8,7 @@ import com.alipay.api.response.AlipayOpenMiniCloudFileDeleteResponse;
 import com.alipay.api.response.AlipayOpenMiniCloudFileQueryResponse;
 import com.alipay.api.response.AlipayOpenMiniCloudFileUploadResponse;
 import com.alipay.api.response.AlipayOpenMiniCloudFilelistQueryResponse;
+import com.alipay.cloudrun.superapp.aop.annotation.ControllerPointCut;
 import com.alipay.cloudrun.superapp.service.OssService;
 import com.alipay.cloudrun.superapp.web.response.Result;
 import lombok.extern.log4j.Log4j2;
@@ -39,6 +40,7 @@ public class OssTestController {
      * @return {@link Result}<{@link AlipayOpenMiniCloudFileUploadResponse}>
      */
     @PostMapping("/upload")
+    @ControllerPointCut
     public Result<AlipayOpenMiniCloudFileUploadResponse> uploadFile(@RequestParam("file") MultipartFile file,
                                                                     @RequestParam(name = "path", required = false) String path) throws IOException {
         log.info("/api/oss/upload POST request, fileName = {}, path = {}", file.getOriginalFilename(), path);
@@ -61,6 +63,7 @@ public class OssTestController {
      * @return {@link Result}<{@link AlipayOpenMiniCloudFilelistQueryResponse}>
      */
     @GetMapping("/list")
+    @ControllerPointCut
     public Result<AlipayOpenMiniCloudFilelistQueryResponse> queryFileList(@RequestParam(name = "path", required = false) String path,
                                                                           @RequestParam(name = "nextToken",required = false) String nextToken) {
         log.info("/api/oss/list GET request, path = {}, nextToken = {}", path, nextToken);
@@ -77,6 +80,7 @@ public class OssTestController {
      * @return {@link Result}<{@link AlipayOpenMiniCloudFileQueryResponse}>
      */
     @GetMapping("/get")
+    @ControllerPointCut
     public Result<AlipayOpenMiniCloudFileQueryResponse> queryFileInfo(@RequestParam("fileId") String fileId) {
 
         log.info("/api/oss/get GET request, fileId = {}", fileId);
@@ -92,6 +96,7 @@ public class OssTestController {
      * @return {@link Result}<{@link AlipayOpenMiniCloudFileDeleteResponse}>
      */
     @DeleteMapping("/delete")
+    @ControllerPointCut
     public Result<AlipayOpenMiniCloudFileDeleteResponse> deleteFile(@RequestParam("path") String path, @RequestParam("fileName") String fileName) {
 
         log.info("/api/oss/delete DELETE request, path = {}, fileName = {}", path, fileName);

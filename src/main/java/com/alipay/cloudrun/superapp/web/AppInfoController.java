@@ -4,6 +4,7 @@
  */
 package com.alipay.cloudrun.superapp.web;
 
+import com.alipay.cloudrun.superapp.aop.annotation.ControllerPointCut;
 import com.alipay.cloudrun.superapp.web.response.Result;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ public class AppInfoController {
      * @return {@link Result}<{@link Map}<{@link String}, {@link String}>>
      */
     @GetMapping("/info")
+    @ControllerPointCut
     public Result<Map<String, String>> getAppInfo() {
 
         log.info("/api/app/info GET request");

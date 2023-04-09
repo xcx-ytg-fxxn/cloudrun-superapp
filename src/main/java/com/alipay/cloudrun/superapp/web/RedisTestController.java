@@ -4,6 +4,7 @@
  */
 package com.alipay.cloudrun.superapp.web;
 
+import com.alipay.cloudrun.superapp.aop.annotation.ControllerPointCut;
 import com.alipay.cloudrun.superapp.service.RedisService;
 import com.alipay.cloudrun.superapp.web.request.SetCacheValueRequest;
 import com.alipay.cloudrun.superapp.web.response.Result;
@@ -35,6 +36,7 @@ public class RedisTestController {
      * @return {@link Result}<{@link String}>
      */
     @GetMapping("/get")
+    @ControllerPointCut
     public Result<String> getCacheValue(@RequestParam("key") String key) {
 
         log.info("/api/redis/get GET request, key = {}", key);
@@ -49,6 +51,7 @@ public class RedisTestController {
      * @return {@link Result}<{@link Void}>
      */
     @PostMapping("/set")
+    @ControllerPointCut
     public Result<Void> setCacheValue(@Valid @RequestBody SetCacheValueRequest request) {
 
         log.info("/api/redis/set POST request, request = {}", request);
@@ -64,6 +67,7 @@ public class RedisTestController {
      * @return {@link Result}<{@link Map}<{@link String}, {@link String}>>
      */
     @GetMapping("/getByPattern")
+    @ControllerPointCut
     public Result<Map<String, String>> getCacheValueByPattern(@RequestParam(name = "pattern", required = false) String pattern) {
 
         log.info("/api/redis/getByPattern GET request, pattern = {}", pattern);
@@ -78,6 +82,7 @@ public class RedisTestController {
      * @return {@link Result}<{@link Boolean}>
      */
     @DeleteMapping("/delete")
+    @ControllerPointCut
     public Result<Boolean> deleteCacheValue(@RequestParam("key") String key) {
 
         log.info("/api/redis/delete DELETE request, key = {}", key);

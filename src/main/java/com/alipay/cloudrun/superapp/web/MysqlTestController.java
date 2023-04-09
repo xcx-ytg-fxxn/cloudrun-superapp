@@ -4,6 +4,7 @@
  */
 package com.alipay.cloudrun.superapp.web;
 
+import com.alipay.cloudrun.superapp.aop.annotation.ControllerPointCut;
 import com.alipay.cloudrun.superapp.dal.model.Record;
 import com.alipay.cloudrun.superapp.service.MysqlService;
 import com.alipay.cloudrun.superapp.web.request.UpdateRecordRequest;
@@ -33,6 +34,7 @@ public class MysqlTestController {
      * @return {@link Result}<{@link List}<{@link Record}>>
      */
     @GetMapping("/query")
+    @ControllerPointCut
     Result<List<Record>> queryRecords() {
 
         log.info("/api/mysql/query GET request");
@@ -47,6 +49,7 @@ public class MysqlTestController {
      * @return {@link Result}<{@link Record}>
      */
     @GetMapping("/get")
+    @ControllerPointCut
     Result<Record> getRecordById(@RequestParam("id") Long id) {
 
         log.info("/api/mysql/get GET request, id = {}", id);
@@ -61,6 +64,7 @@ public class MysqlTestController {
      * @return {@link Result}<{@link Void}>
      */
     @DeleteMapping("/delete")
+    @ControllerPointCut
     Result<Void> deleteRecord(@RequestParam("id") Long id) {
 
         log.info("/api/mysql/delete DELETE request, id = {}", id);
@@ -76,6 +80,7 @@ public class MysqlTestController {
      * @return {@link Result}<{@link Void}>
      */
     @PostMapping("/insert")
+    @ControllerPointCut
     Result<Void> insertRecord(@RequestBody String record) {
 
         log.info("/api/mysql/insert GET request, record = {}", record);
@@ -91,6 +96,7 @@ public class MysqlTestController {
      * @return {@link Result}<{@link Void}>
      */
     @PostMapping("/update")
+    @ControllerPointCut
     Result<Void> updateRecord(@Valid @RequestBody UpdateRecordRequest request) {
 
         log.info("/api/mysql/update POST request, request = {}", request);

@@ -5,6 +5,7 @@
 package com.alipay.cloudrun.superapp.web;
 
 import com.alibaba.nacos.api.naming.pojo.Instance;
+import com.alipay.cloudrun.superapp.aop.annotation.ControllerPointCut;
 import com.alipay.cloudrun.superapp.service.NacosService;
 import com.alipay.cloudrun.superapp.web.response.Result;
 import lombok.SneakyThrows;
@@ -39,6 +40,7 @@ public class NacosTestController {
      * @return {@link Result}<{@link String}>
      */
     @GetMapping("/config/get")
+    @ControllerPointCut
     public Result<String> getNacosConfigValue(@RequestParam("key") String key) {
 
         log.info("/api/nacos/config/get GET request, key = {}", key);
@@ -54,6 +56,7 @@ public class NacosTestController {
      * @return {@link Result}<{@link List}<{@link Instance}>>
      */
     @GetMapping("/discovery/get")
+    @ControllerPointCut
     @SneakyThrows
     public Result<List<Instance>> getServiceInstances(@RequestParam("serviceName") String serviceName) {
 
