@@ -3,7 +3,7 @@
     <appenders>
         <!-- 控制台输出 -->
         <console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class %L %M - %msg%n"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36}.%M:%L - %msg%n"/>
         </console>
 
         <!-- fileName：输出路径  filePattern：命名规则 -->
@@ -13,7 +13,7 @@
                 <ThresholdFilter level="all" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
             <!-- 输出格式 -->
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%n" charset="UTF-8"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36}.%M:%L - %msg%n" charset="UTF-8"/>
             <Policies>
                 <!--  每天生成一个日志文件  -->
                 <TimeBasedTriggeringPolicy interval="1" modulate="true" />
@@ -31,7 +31,7 @@
                 <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
             <!-- 输出格式 -->
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" charset="UTF-8"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36}.%M:%L - %msg%xEx%n" charset="UTF-8"/>
             <Policies>
                 <!--  每天生成一个日志文件  -->
                 <TimeBasedTriggeringPolicy interval="1" modulate="true" />
