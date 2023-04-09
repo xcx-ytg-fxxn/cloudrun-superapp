@@ -37,6 +37,11 @@ public class Result<T> {
      */
     private String errorMessage;
 
+    /**
+     * 请求耗时
+     */
+    private String timeCost;
+
 
     public Result(boolean success) {
         this.success = success;

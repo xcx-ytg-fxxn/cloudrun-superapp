@@ -15,6 +15,9 @@ public enum AppExceptionCodeEnum {
     /** 系统异常 */
     SYSTEM_ERROR("SYSTEM_ERROR", "系统异常"),
 
+    /** 缺少参数 */
+    MISSING_PARAM("MISSING_PARAM", "缺少参数"),
+
     /** 对象存储异常 */
     OSS_ERROR("OSS_ERROR", "对象存储异常");
 
