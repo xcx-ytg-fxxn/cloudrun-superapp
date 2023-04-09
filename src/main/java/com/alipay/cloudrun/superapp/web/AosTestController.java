@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
+ * 蚂蚁开放搜索服务AOS测试
+ *
  * @author siwei
  * @version AosTestController.java, v 0.1 2023年04月09日 19:22 siwei
  */
