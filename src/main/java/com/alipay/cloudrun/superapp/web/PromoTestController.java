@@ -5,7 +5,11 @@
 package com.alipay.cloudrun.superapp.web;
 
 import com.alipay.api.domain.TechriskInnovateMpcpromoDataSyncModel;
+import com.alipay.api.domain.TechriskInnovateMpcpromoItemQueryModel;
+import com.alipay.api.domain.TechriskInnovateMpcpromoSceneCreateModel;
 import com.alipay.api.response.TechriskInnovateMpcpromoDataSyncResponse;
+import com.alipay.api.response.TechriskInnovateMpcpromoItemQueryResponse;
+import com.alipay.api.response.TechriskInnovateMpcpromoSceneCreateResponse;
 import com.alipay.cloudrun.superapp.aop.annotation.ControllerPointCut;
 import com.alipay.cloudrun.superapp.service.PromoService;
 import com.alipay.cloudrun.superapp.web.response.Result;
@@ -44,6 +48,38 @@ public class PromoTestController {
 
         log.info("/api/promo/syncData POST request, dataSyncModel = {}", dataSyncModel);
         return Result.success(promoService.syncData(dataSyncModel));
+
+    }
+
+    /**
+     * 小程序云智能应用创建场景接口
+     *
+     * @param sceneCreateModel 场景创建模型
+     * @return {@link Result}<{@link TechriskInnovateMpcpromoSceneCreateResponse}>
+     */
+    @PostMapping("/createScene")
+    @ControllerPointCut
+    @SneakyThrows
+    Result<TechriskInnovateMpcpromoSceneCreateResponse> createScene(@RequestBody TechriskInnovateMpcpromoSceneCreateModel sceneCreateModel) {
+
+        log.info("/api/promo/createScene POST request, sceneCreateModel = {}", sceneCreateModel);
+        return Result.success(promoService.createScene(sceneCreateModel));
+
+    }
+
+    /**
+     * 小程序云智能应用推荐查询接口
+     *
+     * @param itemQueryModel 项目查询模型
+     * @return {@link Result}<{@link TechriskInnovateMpcpromoItemQueryResponse}>
+     */
+    @PostMapping("/queryItem")
+    @ControllerPointCut
+    @SneakyThrows
+    Result<TechriskInnovateMpcpromoItemQueryResponse> queryItem(@RequestBody TechriskInnovateMpcpromoItemQueryModel itemQueryModel) {
+
+        log.info("/api/promo/queryItem POST request, itemQueryModel = {}", itemQueryModel);
+        return Result.success(promoService.queryItem(itemQueryModel));
 
     }
 

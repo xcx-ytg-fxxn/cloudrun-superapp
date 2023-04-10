@@ -9,8 +9,14 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.TechriskInnovateMpcpromoDataSyncModel;
+import com.alipay.api.domain.TechriskInnovateMpcpromoItemQueryModel;
+import com.alipay.api.domain.TechriskInnovateMpcpromoSceneCreateModel;
 import com.alipay.api.request.TechriskInnovateMpcpromoDataSyncRequest;
+import com.alipay.api.request.TechriskInnovateMpcpromoItemQueryRequest;
+import com.alipay.api.request.TechriskInnovateMpcpromoSceneCreateRequest;
 import com.alipay.api.response.TechriskInnovateMpcpromoDataSyncResponse;
+import com.alipay.api.response.TechriskInnovateMpcpromoItemQueryResponse;
+import com.alipay.api.response.TechriskInnovateMpcpromoSceneCreateResponse;
 import com.alipay.cloudrun.superapp.service.PromoService;
 import com.alipay.cloudrun.superapp.util.PublicConstant;
 import lombok.extern.log4j.Log4j2;
@@ -39,6 +45,44 @@ public class PromoServiceImpl implements PromoService {
         TechriskInnovateMpcpromoDataSyncRequest request = new TechriskInnovateMpcpromoDataSyncRequest();
         request.setBizContent(JSON.toJSONString(dataSyncModel));
         TechriskInnovateMpcpromoDataSyncResponse response = alipayClient.execute(request);
+        return response;
+
+    }
+
+    /**
+     * 小程序云智能应用场景创建接口
+     *
+     * @param sceneCreateModel 场景创建模型
+     * @return {@link TechriskInnovateMpcpromoSceneCreateResponse}
+     */
+    @Override
+    public TechriskInnovateMpcpromoSceneCreateResponse createScene(TechriskInnovateMpcpromoSceneCreateModel sceneCreateModel) throws AlipayApiException {
+
+        log.info("create scene for promo service, sceneCreateModel = {}", sceneCreateModel);
+        AlipayClient alipayClient = new DefaultAlipayClient(PublicConstant.SERVER_URL, PublicConstant.APP_ID,
+                PublicConstant.PRIVATE_KEY, "json", "utf-8", PublicConstant.PUBLIC_KEY, "RSA2");
+        TechriskInnovateMpcpromoSceneCreateRequest request = new TechriskInnovateMpcpromoSceneCreateRequest();
+        request.setBizContent(JSON.toJSONString(sceneCreateModel));
+        TechriskInnovateMpcpromoSceneCreateResponse response = alipayClient.execute(request);
+        return response;
+
+    }
+
+    /**
+     * 小程序云智能应用推荐查询接口
+     *
+     * @param itemQueryModel 项目查询模型
+     * @return {@link TechriskInnovateMpcpromoItemQueryResponse}
+     */
+    @Override
+    public TechriskInnovateMpcpromoItemQueryResponse queryItem(TechriskInnovateMpcpromoItemQueryModel itemQueryModel) throws AlipayApiException {
+
+        log.info("create scene for promo service, itemQueryModel = {}", itemQueryModel);
+        AlipayClient alipayClient = new DefaultAlipayClient(PublicConstant.SERVER_URL, PublicConstant.APP_ID,
+                PublicConstant.PRIVATE_KEY, "json", "utf-8", PublicConstant.PUBLIC_KEY, "RSA2");
+        TechriskInnovateMpcpromoItemQueryRequest request = new TechriskInnovateMpcpromoItemQueryRequest();
+        request.setBizContent(JSON.toJSONString(itemQueryModel));
+        TechriskInnovateMpcpromoItemQueryResponse response = alipayClient.execute(request);
         return response;
 
     }
