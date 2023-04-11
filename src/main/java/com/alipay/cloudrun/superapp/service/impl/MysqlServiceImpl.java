@@ -91,4 +91,20 @@ public class MysqlServiceImpl implements MysqlService {
         return recordMapper.insert(record);
 
     }
+
+    /**
+     * 慢sql查询
+     *
+     * @param time 慢sql时间
+     */
+    @Override
+    public void slowQuery(Integer time) {
+
+        log.info("slow query test, time = {}", time);
+        if (time == null) {
+            time = 5;
+        }
+        recordMapper.slowQuery(time);
+
+    }
 }

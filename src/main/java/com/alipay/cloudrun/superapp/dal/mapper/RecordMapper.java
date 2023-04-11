@@ -71,4 +71,15 @@ public interface RecordMapper {
             "select id, gmt_create, gmt_modified, record from record where id = #{id}"
     })
     Record selectById(@Param("id") Long id);
+
+    /**
+     * 慢sql查询
+     *
+     * @param time 时间
+     * @return int
+     */
+    @Select({
+            "select sleep(#{time})"
+    })
+    int slowQuery(@Param("time") Integer time);
 }

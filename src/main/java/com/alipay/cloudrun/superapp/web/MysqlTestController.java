@@ -105,4 +105,20 @@ public class MysqlTestController {
 
     }
 
+    /**
+     * 慢SQL测试
+     *
+     * @param time 慢sql持续时间
+     * @return {@link Result}<{@link Void}>
+     */
+    @GetMapping("/slow")
+    @ControllerPointCut
+    Result<Void> slowQueryTest(@RequestParam(name = "time", required = false) Integer time) {
+
+        log.info("/api/mysql/slow GET request, time = {}", time);
+        mysqlService.slowQuery(time);
+        return Result.success();
+
+    }
+
 }

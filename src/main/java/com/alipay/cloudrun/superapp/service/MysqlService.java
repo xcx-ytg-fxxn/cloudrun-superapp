@@ -52,6 +52,11 @@ public interface MysqlService {
      */
     Long insertRecord(String record);
 
-
+    /**
+     * 慢sql查询
+     *
+     * @param time 慢sql时间
+     */
+    void slowQuery(Integer time);
 
 }
