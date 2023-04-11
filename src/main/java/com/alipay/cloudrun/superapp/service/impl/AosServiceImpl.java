@@ -33,11 +33,11 @@ public class AosServiceImpl implements AosService {
     @Override
     public AlipayOpenMiniCloudAosdataSyncResponse dataSync(AlipayOpenMiniCloudAosdataSyncModel dataSyncModel) throws AlipayApiException {
 
-        log.info("aos data sync, dataSyncModel = {}", dataSyncModel);
+        log.info("aos data sync, dataSyncModel = {}", JSON.toJSONString(dataSyncModel));
         AlipayClient alipayClient = new DefaultAlipayClient(PublicConstant.SERVER_URL, PublicConstant.APP_ID,
                 PublicConstant.PRIVATE_KEY, "json", "utf-8", PublicConstant.PUBLIC_KEY, "RSA2");
         AlipayOpenMiniCloudAosdataSyncRequest request = new AlipayOpenMiniCloudAosdataSyncRequest();
-        request.setBizContent(JSON.toJSONString(dataSyncModel));
+        request.setBizModel(dataSyncModel);
         AlipayOpenMiniCloudAosdataSyncResponse response = alipayClient.execute(request);
         return response;
 
@@ -52,11 +52,11 @@ public class AosServiceImpl implements AosService {
     @Override
     public AlipayOpenMiniCloudAossuggestQueryResponse suggestQuery(AlipayOpenMiniCloudAossuggestQueryModel suggestQueryModel) throws AlipayApiException {
 
-        log.info("aos suggest query, suggestQueryModel = {}", suggestQueryModel);
+        log.info("aos suggest query, suggestQueryModel = {}", JSON.toJSONString(suggestQueryModel));
         AlipayClient alipayClient = new DefaultAlipayClient(PublicConstant.SERVER_URL, PublicConstant.APP_ID,
                 PublicConstant.PRIVATE_KEY, "json", "utf-8", PublicConstant.PUBLIC_KEY, "RSA2");
         AlipayOpenMiniCloudAossuggestQueryRequest request = new AlipayOpenMiniCloudAossuggestQueryRequest();
-        request.setBizContent(JSON.toJSONString(suggestQueryModel));
+        request.setBizModel(suggestQueryModel);
         AlipayOpenMiniCloudAossuggestQueryResponse response = alipayClient.execute(request);
         return response;
 
@@ -71,11 +71,11 @@ public class AosServiceImpl implements AosService {
     @Override
     public AlipayOpenMiniCloudAositemQueryResponse itemQuery(AlipayOpenMiniCloudAositemQueryModel itemQueryModel) throws AlipayApiException {
 
-        log.info("aos item query, itemQueryModel = {}", itemQueryModel);
+        log.info("aos item query, itemQueryModel = {}", JSON.toJSONString(itemQueryModel));
         AlipayClient alipayClient = new DefaultAlipayClient(PublicConstant.SERVER_URL, PublicConstant.APP_ID,
                 PublicConstant.PRIVATE_KEY, "json", "utf-8", PublicConstant.PUBLIC_KEY, "RSA2");
         AlipayOpenMiniCloudAositemQueryRequest request = new AlipayOpenMiniCloudAositemQueryRequest();
-        request.setBizContent(JSON.toJSONString(itemQueryModel));
+        request.setBizModel(itemQueryModel);
         AlipayOpenMiniCloudAositemQueryResponse response = alipayClient.execute(request);
         return response;
 
@@ -90,11 +90,11 @@ public class AosServiceImpl implements AosService {
     @Override
     public AlipayOpenMiniCloudAoshotQueryResponse hotQuery(AlipayOpenMiniCloudAoshotQueryModel hotQueryModel) throws AlipayApiException {
 
-        log.info("aos hot query, hotQueryModel = {}", hotQueryModel);
+        log.info("aos hot query, hotQueryModel = {}", JSON.toJSONString(hotQueryModel));
         AlipayClient alipayClient = new DefaultAlipayClient(PublicConstant.SERVER_URL, PublicConstant.APP_ID,
                 PublicConstant.PRIVATE_KEY, "json", "utf-8", PublicConstant.PUBLIC_KEY, "RSA2");
         AlipayOpenMiniCloudAoshotQueryRequest request = new AlipayOpenMiniCloudAoshotQueryRequest();
-        request.setBizContent(JSON.toJSONString(hotQueryModel));
+        request.setBizModel(hotQueryModel);
         AlipayOpenMiniCloudAoshotQueryResponse response = alipayClient.execute(request);
         return response;
 
@@ -109,11 +109,11 @@ public class AosServiceImpl implements AosService {
     @Override
     public AlipayOpenMiniCloudAoshintQueryResponse hintQuery(AlipayOpenMiniCloudAoshintQueryModel hintQueryModel) throws AlipayApiException {
 
-        log.info("aos hint query, hintQueryModel = {}", hintQueryModel);
+        log.info("aos hint query, hintQueryModel = {}", JSON.toJSONString(hintQueryModel));
         AlipayClient alipayClient = new DefaultAlipayClient(PublicConstant.SERVER_URL, PublicConstant.APP_ID,
                 PublicConstant.PRIVATE_KEY, "json", "utf-8", PublicConstant.PUBLIC_KEY, "RSA2");
         AlipayOpenMiniCloudAoshintQueryRequest request = new AlipayOpenMiniCloudAoshintQueryRequest();
-        request.setBizContent(JSON.toJSONString(hintQueryModel));
+        request.setBizModel(hintQueryModel);
         AlipayOpenMiniCloudAoshintQueryResponse response = alipayClient.execute(request);
         return response;
 
@@ -128,11 +128,11 @@ public class AosServiceImpl implements AosService {
     @Override
     public AlipayOpenMiniCloudAosbehaviorSyncResponse behaviorSync(AlipayOpenMiniCloudAosbehaviorSyncModel behaviorSyncModel) throws AlipayApiException {
 
-        log.info("aos behavior sync, behaviorSyncModel = {}" , behaviorSyncModel);
+        log.info("aos behavior sync, behaviorSyncModel = {}" , JSON.toJSONString(behaviorSyncModel));
         AlipayClient alipayClient = new DefaultAlipayClient(PublicConstant.SERVER_URL, PublicConstant.APP_ID,
                 PublicConstant.PRIVATE_KEY, "json", "utf-8", PublicConstant.PUBLIC_KEY, "RSA2");
         AlipayOpenMiniCloudAosbehaviorSyncRequest request = new AlipayOpenMiniCloudAosbehaviorSyncRequest();
-        request.setBizContent(JSON.toJSONString(behaviorSyncModel));
+        request.setBizModel(behaviorSyncModel);
         AlipayOpenMiniCloudAosbehaviorSyncResponse response = alipayClient.execute(request);
         return response;
 

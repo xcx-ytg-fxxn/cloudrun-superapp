@@ -4,6 +4,7 @@
  */
 package com.alipay.cloudrun.superapp.web;
 
+import com.alibaba.fastjson.JSON;
 import com.alipay.api.domain.*;
 import com.alipay.api.response.*;
 import com.alipay.cloudrun.superapp.aop.annotation.ControllerPointCut;
@@ -39,7 +40,7 @@ public class AosTestController {
     @SneakyThrows
     Result<AlipayOpenMiniCloudAosdataSyncResponse> dataSync(@RequestBody AlipayOpenMiniCloudAosdataSyncModel dataSyncRequest) {
 
-        log.info("/api/aos/dataSync POST request, dataSyncRequest = {}", dataSyncRequest);
+        log.info("/api/aos/dataSync POST request, dataSyncRequest = {}", JSON.toJSONString(dataSyncRequest));
         return Result.success(aosService.dataSync(dataSyncRequest));
 
     }
@@ -55,7 +56,7 @@ public class AosTestController {
     @SneakyThrows
     Result<AlipayOpenMiniCloudAossuggestQueryResponse> suggestQuery(@RequestBody AlipayOpenMiniCloudAossuggestQueryModel suggestQueryRequest) {
 
-        log.info("/api/aos/suggestQuery POST request, suggestQueryRequest = {}", suggestQueryRequest);
+        log.info("/api/aos/suggestQuery POST request, suggestQueryRequest = {}", JSON.toJSONString(suggestQueryRequest));
         return Result.success(aosService.suggestQuery(suggestQueryRequest));
 
     }
@@ -71,7 +72,7 @@ public class AosTestController {
     @SneakyThrows
     Result<AlipayOpenMiniCloudAositemQueryResponse> itemQuery(@RequestBody AlipayOpenMiniCloudAositemQueryModel itemQueryRequest) {
 
-        log.info("/api/aos/itemQuery POST request, itemQueryRequest = {}", itemQueryRequest);
+        log.info("/api/aos/itemQuery POST request, itemQueryRequest = {}", JSON.toJSONString(itemQueryRequest));
         return Result.success(aosService.itemQuery(itemQueryRequest));
 
     }
@@ -87,7 +88,7 @@ public class AosTestController {
     @SneakyThrows
     Result<AlipayOpenMiniCloudAoshotQueryResponse> hotQuery(@RequestBody AlipayOpenMiniCloudAoshotQueryModel hotQueryRequest) {
 
-        log.info("/api/aos/hotQuery POST request, hotQueryRequest = {}", hotQueryRequest);
+        log.info("/api/aos/hotQuery POST request, hotQueryRequest = {}", JSON.toJSONString(hotQueryRequest));
         return Result.success(aosService.hotQuery(hotQueryRequest));
 
     }
@@ -103,7 +104,7 @@ public class AosTestController {
     @SneakyThrows
     Result<AlipayOpenMiniCloudAoshintQueryResponse> hintQuery(@RequestBody AlipayOpenMiniCloudAoshintQueryModel hintQueryModel) {
 
-        log.info("/api/aos/hintQuery POST request, hintQueryModel = {}", hintQueryModel);
+        log.info("/api/aos/hintQuery POST request, hintQueryModel = {}", JSON.toJSONString(hintQueryModel));
         return Result.success(aosService.hintQuery(hintQueryModel));
 
     }
@@ -119,7 +120,7 @@ public class AosTestController {
     @SneakyThrows
     Result<AlipayOpenMiniCloudAosbehaviorSyncResponse> behaviorSync(@RequestBody AlipayOpenMiniCloudAosbehaviorSyncModel behaviorSyncRequest) {
 
-        log.info("/api/aos/behaviorSync POST request, behaviorSyncRequest = {}", behaviorSyncRequest);
+        log.info("/api/aos/behaviorSync POST request, behaviorSyncRequest = {}", JSON.toJSONString(behaviorSyncRequest));
         return Result.success(aosService.behaviorSync(behaviorSyncRequest));
 
     }

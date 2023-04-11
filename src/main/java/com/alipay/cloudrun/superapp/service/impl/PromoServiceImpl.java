@@ -39,11 +39,11 @@ public class PromoServiceImpl implements PromoService {
     @Override
     public TechriskInnovateMpcpromoDataSyncResponse syncData(TechriskInnovateMpcpromoDataSyncModel dataSyncModel) throws AlipayApiException {
 
-        log.info("sync data to promo service, dataSyncModel = {}", dataSyncModel);
+        log.info("sync data to promo service, dataSyncModel = {}", JSON.toJSONString(dataSyncModel));
         AlipayClient alipayClient = new DefaultAlipayClient(PublicConstant.SERVER_URL, PublicConstant.APP_ID,
                 PublicConstant.PRIVATE_KEY, "json", "utf-8", PublicConstant.PUBLIC_KEY, "RSA2");
         TechriskInnovateMpcpromoDataSyncRequest request = new TechriskInnovateMpcpromoDataSyncRequest();
-        request.setBizContent(JSON.toJSONString(dataSyncModel));
+        request.setBizModel(dataSyncModel);
         TechriskInnovateMpcpromoDataSyncResponse response = alipayClient.execute(request);
         return response;
 
@@ -58,11 +58,11 @@ public class PromoServiceImpl implements PromoService {
     @Override
     public TechriskInnovateMpcpromoSceneCreateResponse createScene(TechriskInnovateMpcpromoSceneCreateModel sceneCreateModel) throws AlipayApiException {
 
-        log.info("create scene for promo service, sceneCreateModel = {}", sceneCreateModel);
+        log.info("create scene for promo service, sceneCreateModel = {}", JSON.toJSONString(sceneCreateModel));
         AlipayClient alipayClient = new DefaultAlipayClient(PublicConstant.SERVER_URL, PublicConstant.APP_ID,
                 PublicConstant.PRIVATE_KEY, "json", "utf-8", PublicConstant.PUBLIC_KEY, "RSA2");
         TechriskInnovateMpcpromoSceneCreateRequest request = new TechriskInnovateMpcpromoSceneCreateRequest();
-        request.setBizContent(JSON.toJSONString(sceneCreateModel));
+        request.setBizModel(sceneCreateModel);
         TechriskInnovateMpcpromoSceneCreateResponse response = alipayClient.execute(request);
         return response;
 
@@ -77,11 +77,11 @@ public class PromoServiceImpl implements PromoService {
     @Override
     public TechriskInnovateMpcpromoItemQueryResponse queryItem(TechriskInnovateMpcpromoItemQueryModel itemQueryModel) throws AlipayApiException {
 
-        log.info("create scene for promo service, itemQueryModel = {}", itemQueryModel);
+        log.info("item query from promo service, itemQueryModel = {}", JSON.toJSONString(itemQueryModel));
         AlipayClient alipayClient = new DefaultAlipayClient(PublicConstant.SERVER_URL, PublicConstant.APP_ID,
                 PublicConstant.PRIVATE_KEY, "json", "utf-8", PublicConstant.PUBLIC_KEY, "RSA2");
         TechriskInnovateMpcpromoItemQueryRequest request = new TechriskInnovateMpcpromoItemQueryRequest();
-        request.setBizContent(JSON.toJSONString(itemQueryModel));
+        request.setBizModel(itemQueryModel);
         TechriskInnovateMpcpromoItemQueryResponse response = alipayClient.execute(request);
         return response;
 

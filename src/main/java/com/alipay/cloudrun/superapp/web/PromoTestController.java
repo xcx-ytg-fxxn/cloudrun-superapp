@@ -4,6 +4,7 @@
  */
 package com.alipay.cloudrun.superapp.web;
 
+import com.alibaba.fastjson.JSON;
 import com.alipay.api.domain.TechriskInnovateMpcpromoDataSyncModel;
 import com.alipay.api.domain.TechriskInnovateMpcpromoItemQueryModel;
 import com.alipay.api.domain.TechriskInnovateMpcpromoSceneCreateModel;
@@ -46,7 +47,7 @@ public class PromoTestController {
     @SneakyThrows
     Result<TechriskInnovateMpcpromoDataSyncResponse> syncData(@RequestBody TechriskInnovateMpcpromoDataSyncModel dataSyncModel) {
 
-        log.info("/api/promo/syncData POST request, dataSyncModel = {}", dataSyncModel);
+        log.info("/api/promo/syncData POST request, dataSyncModel = {}", JSON.toJSONString(dataSyncModel));
         return Result.success(promoService.syncData(dataSyncModel));
 
     }
@@ -62,7 +63,7 @@ public class PromoTestController {
     @SneakyThrows
     Result<TechriskInnovateMpcpromoSceneCreateResponse> createScene(@RequestBody TechriskInnovateMpcpromoSceneCreateModel sceneCreateModel) {
 
-        log.info("/api/promo/createScene POST request, sceneCreateModel = {}", sceneCreateModel);
+        log.info("/api/promo/createScene POST request, sceneCreateModel = {}", JSON.toJSONString(sceneCreateModel));
         return Result.success(promoService.createScene(sceneCreateModel));
 
     }
@@ -78,7 +79,7 @@ public class PromoTestController {
     @SneakyThrows
     Result<TechriskInnovateMpcpromoItemQueryResponse> queryItem(@RequestBody TechriskInnovateMpcpromoItemQueryModel itemQueryModel) {
 
-        log.info("/api/promo/queryItem POST request, itemQueryModel = {}", itemQueryModel);
+        log.info("/api/promo/queryItem POST request, itemQueryModel = {}", JSON.toJSONString(itemQueryModel));
         return Result.success(promoService.queryItem(itemQueryModel));
 
     }
