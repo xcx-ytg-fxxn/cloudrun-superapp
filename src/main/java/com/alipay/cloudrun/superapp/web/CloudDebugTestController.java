@@ -5,6 +5,7 @@
 package com.alipay.cloudrun.superapp.web;
 
 import com.alibaba.fastjson.JSON;
+import com.alipay.cloudrun.superapp.aop.annotation.ControllerPointCut;
 import com.alipay.cloudrun.superapp.web.response.HttpRequestInfo;
 import com.alipay.cloudrun.superapp.web.response.Result;
 import lombok.extern.log4j.Log4j2;
@@ -35,6 +36,7 @@ public class CloudDebugTestController {
      * @return {@link Result}<{@link HttpRequestInfo}>
      */
     @GetMapping("/get")
+    @ControllerPointCut
     public Result<HttpRequestInfo> testGetMethod(HttpServletRequest request) {
         return Result.success(getHttpRequestInfo(request, HttpMethod.GET));
     }
@@ -46,6 +48,7 @@ public class CloudDebugTestController {
      * @return {@link Result}<{@link HttpRequestInfo}>
      */
     @PostMapping("/post")
+    @ControllerPointCut
     public Result<HttpRequestInfo> testPostMethod(HttpServletRequest request) {
         return Result.success(getHttpRequestInfo(request, HttpMethod.POST));
     }
@@ -57,6 +60,7 @@ public class CloudDebugTestController {
      * @return {@link Result}<{@link HttpRequestInfo}>
      */
     @DeleteMapping("/delete")
+    @ControllerPointCut
     public Result<HttpRequestInfo> testDeleteMethod(HttpServletRequest request) {
         return Result.success(getHttpRequestInfo(request, HttpMethod.DELETE));
     }
@@ -68,6 +72,7 @@ public class CloudDebugTestController {
      * @return {@link Result}<{@link HttpRequestInfo}>
      */
     @PutMapping("/put")
+    @ControllerPointCut
     public Result<HttpRequestInfo> testPutMethod(HttpServletRequest request) {
         return Result.success(getHttpRequestInfo(request, HttpMethod.PUT));
     }
