@@ -4,6 +4,12 @@
  */
 package com.alipay.cloudrun.superapp.aop;
 
+import com.alibaba.fastjson.JSON;
+import com.alipay.cloudrun.superapp.aop.reporter.FailedCaseRequest;
+import com.alipay.cloudrun.superapp.aop.reporter.PassedCaseRequest;
+import com.alipay.cloudrun.superapp.aop.reporter.ReporterConstants;
+import com.alipay.cloudrun.superapp.aop.reporter.RequestReporter;
+import com.alipay.cloudrun.superapp.model.enums.AlipayCloudrunProductEnum;
 import com.alipay.cloudrun.superapp.model.exception.AppException;
 import com.alipay.cloudrun.superapp.model.exception.AppExceptionCodeEnum;
 import com.alipay.cloudrun.superapp.web.response.Result;
@@ -12,6 +18,10 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Controller层切面
@@ -40,16 +50,16 @@ public class ControllerAspect {
 
         try {
             res = joinPoint.proceed();
+            handleSuccess();
         } catch (Throwable t) {
             log.error("http request process fail: ", t);
             res = handledException(t);
-
+            handleFailure(JSON.toJSONString(res));
         } finally {
             Long cost = System.currentTimeMillis() - startTime;
             ((Result) res).setTimeCost(cost + "ms");
-            return res;
         }
-
+        return res;
     }
 
     /**
@@ -68,6 +78,56 @@ public class ControllerAspect {
         //其他异常
         return Result.fail(AppExceptionCodeEnum.SYSTEM_ERROR.getCode(), t.getMessage());
 
+    }
+
+    private void handleSuccess() {
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest httpServletRequest = requestAttributes.getRequest();
+        String uri = httpServletRequest.getRequestURI();
+        PassedCaseRequest request = new PassedCaseRequest();
+        request.setRequestPath(uri);
+        request.setRequestProduct(getRequestProduct(uri));
+        RequestReporter.reportPassedCase(request);
+    }
+
+    private void handleFailure(String response) {
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest httpServletRequest = requestAttributes.getRequest();
+        String uri = httpServletRequest.getRequestURI();
+        FailedCaseRequest request = new FailedCaseRequest();
+        request.setAppId(ReporterConstants.APP_ID);
+        request.setEnvId(ReporterConstants.ENV_ID);
+        request.setServiceName(ReporterConstants.SERVICE_NAME);
+        request.setRequestPath(uri);
+        request.setRequestProduct(getRequestProduct(uri));
+        request.setResponse(response);
+        RequestReporter.reportFailedCase(request);
+    }
+
+    private String getRequestProduct(String uri) {
+        if (uri == null || uri.isEmpty()) {
+            return AlipayCloudrunProductEnum.OTHER.name();
+        } else if (uri.startsWith("/api/mysql")) {
+            return AlipayCloudrunProductEnum.MYSQL.name();
+        } else if (uri.startsWith("/api/redis")) {
+            return AlipayCloudrunProductEnum.REDIS.name();
+        } else if (uri.startsWith("/api/oss")) {
+            return AlipayCloudrunProductEnum.OSS.name();
+        } else if (uri.startsWith("/api/nacos")) {
+            return AlipayCloudrunProductEnum.CPT_NACOS.name();
+        } else if (uri.startsWith("/api/promo")) {
+            return AlipayCloudrunProductEnum.PROMO.name();
+        } else if (uri.startsWith("/api/aos")) {
+            return AlipayCloudrunProductEnum.AOS.name();
+        } else if (uri.startsWith("/api/cloud/debug")) {
+            return AlipayCloudrunProductEnum.CLOUD_DEBUG.name();
+        } else if (uri.startsWith("/api/cpu")) {
+            return AlipayCloudrunProductEnum.CHAOS_CPU.name();
+        } else if (uri.startsWith("/api/memory")) {
+            return AlipayCloudrunProductEnum.CHAOS_MEM.name();
+        } else {
+            return AlipayCloudrunProductEnum.OTHER.name();
+        }
     }
 
 }
