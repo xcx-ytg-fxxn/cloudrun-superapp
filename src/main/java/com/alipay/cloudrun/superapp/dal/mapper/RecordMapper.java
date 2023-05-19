@@ -26,7 +26,7 @@ public interface RecordMapper {
             "insert into record (record) values (#{record})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID() as id", keyProperty="id", before=false, resultType=Long.class)
-    long insert(@Param("record") String record);
+    long insert(Record record);
 
     /**
      * 更新记录

@@ -88,7 +88,10 @@ public class MysqlServiceImpl implements MysqlService {
     public Long insertRecord(String record) {
 
         log.info("insert record, record = {}", record);
-        return recordMapper.insert(record);
+        Record recordDO = new Record();
+        recordDO.setRecord(record);
+        recordMapper.insert(recordDO);
+        return recordDO.getId();
 
     }
 
