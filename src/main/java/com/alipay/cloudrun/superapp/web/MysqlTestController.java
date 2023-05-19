@@ -81,11 +81,10 @@ public class MysqlTestController {
      */
     @PostMapping("/insert")
     @ControllerPointCut
-    Result<Void> insertRecord(@RequestBody String record) {
+    Result<Long> insertRecord(@RequestBody String record) {
 
         log.info("/api/mysql/insert GET request, record = {}", record);
-        mysqlService.insertRecord(record);
-        return Result.success();
+        return Result.success(mysqlService.insertRecord(record));
 
     }
 
