@@ -27,5 +27,10 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 # 设置时区
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo '$TZ' > /etc/timezone
 
+# 下载蚂蚁版本链路追踪agent
+RUN curl https://ant-trace.opentrscdn.com/skywalking-agent.tar.gz --output /app/skywalking-agent.tar.gz
+# 解压至指定路径
+RUN tar -zxvf /app/skywalking-agent.tar.gz -C /app
+
 # 运行启动命令
-ENTRYPOINT ["java", "-jar", "superapp-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-javaagent:/app/skywalking-agent/skywalking-agent.jar", "-jar", "superapp-0.0.1-SNAPSHOT.jar"]
