@@ -19,7 +19,10 @@ public enum AppExceptionCodeEnum {
     MISSING_PARAM("MISSING_PARAM", "缺少参数"),
 
     /** 对象存储异常 */
-    OSS_ERROR("OSS_ERROR", "对象存储异常");
+    OSS_ERROR("OSS_ERROR", "对象存储异常"),
+
+    /** 文件已存在 */
+    FILE_EXISTS("OSS_ERROR", "文件已存在");
 
     /** 错误码 */
     private String code;
