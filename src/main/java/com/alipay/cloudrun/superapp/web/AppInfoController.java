@@ -74,8 +74,8 @@ public class AppInfoController {
         MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
         Object attribute = mBeanServer.getAttribute(new ObjectName("java.lang","type","OperatingSystem"), "TotalPhysicalMemorySize");
         Object attribute2 = mBeanServer.getAttribute(new ObjectName("java.lang","type","OperatingSystem"), "FreePhysicalMemorySize");
-        memoryStatus.put("Total memory", Long.parseLong(attribute.toString()));
-        memoryStatus.put("Free  memory", Long.parseLong(attribute2.toString()));
+        memoryStatus.put("totalMemory", Long.parseLong(attribute.toString()));
+        memoryStatus.put("freeMemory", Long.parseLong(attribute2.toString()));
 
         return Result.success(memoryStatus);
 

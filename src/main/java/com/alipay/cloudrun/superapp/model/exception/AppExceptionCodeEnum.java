@@ -22,7 +22,7 @@ public enum AppExceptionCodeEnum {
     OSS_ERROR("OSS_ERROR", "对象存储异常"),
 
     /** 文件已存在 */
-    FILE_EXISTS("OSS_ERROR", "文件已存在");
+    FILE_EXISTS("FILE_EXISTS", "文件已存在");
 
     /** 错误码 */
     private String code;
