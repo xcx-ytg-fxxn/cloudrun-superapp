@@ -97,7 +97,7 @@
 		<dependency>
 			<groupId>com.alipay.sdk</groupId>
 			<artifactId>alipay-sdk-java</artifactId>
-			<version>4.35.101.ALL</version>
+			<version>4.35.150.ALL</version>
 		</dependency>
 		<!--redis-->
 		<dependency>

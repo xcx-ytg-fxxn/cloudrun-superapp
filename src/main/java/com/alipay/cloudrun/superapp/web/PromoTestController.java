@@ -5,12 +5,9 @@
 package com.alipay.cloudrun.superapp.web;
 
 import com.alibaba.fastjson.JSON;
-import com.alipay.api.domain.TechriskInnovateMpcpromoDataSyncModel;
-import com.alipay.api.domain.TechriskInnovateMpcpromoItemQueryModel;
-import com.alipay.api.domain.TechriskInnovateMpcpromoSceneCreateModel;
-import com.alipay.api.response.TechriskInnovateMpcpromoDataSyncResponse;
-import com.alipay.api.response.TechriskInnovateMpcpromoItemQueryResponse;
-import com.alipay.api.response.TechriskInnovateMpcpromoSceneCreateResponse;
+import com.alibaba.fastjson.JSONObject;
+import com.alipay.api.domain.*;
+import com.alipay.api.response.*;
 import com.alipay.cloudrun.superapp.aop.annotation.ControllerPointCut;
 import com.alipay.cloudrun.superapp.service.PromoService;
 import com.alipay.cloudrun.superapp.web.response.Result;
@@ -37,7 +34,7 @@ public class PromoTestController {
     PromoService promoService;
 
     /**
-     * 小程序云智能应用上传数据接口
+     * 小程序云个性化推荐上传数据接口
      *
      * @param dataSyncModel 数据同步模型
      * @return {@link Result}<{@link TechriskInnovateMpcpromoDataSyncResponse}>
@@ -53,7 +50,7 @@ public class PromoTestController {
     }
 
     /**
-     * 小程序云智能应用创建场景接口
+     * 小程序云个性化推荐场景创建接口
      *
      * @param sceneCreateModel 场景创建模型
      * @return {@link Result}<{@link TechriskInnovateMpcpromoSceneCreateResponse}>
@@ -69,7 +66,7 @@ public class PromoTestController {
     }
 
     /**
-     * 小程序云智能应用推荐查询接口
+     * 小程序云个性化推荐推荐查询接口
      *
      * @param itemQueryModel 项目查询模型
      * @return {@link Result}<{@link TechriskInnovateMpcpromoItemQueryResponse}>
@@ -81,6 +78,150 @@ public class PromoTestController {
 
         log.info("/api/promo/queryItem POST request, itemQueryModel = {}", JSON.toJSONString(itemQueryModel));
         return Result.success(promoService.queryItem(itemQueryModel));
+
+    }
+
+    /**
+     * 小程序云个性化推荐场景中商品删除接口
+     *
+     * @param sceneReleaseModel 删除场景商品模型
+     * @return {@link Result}<{@link TechriskInnovateMpcpromoItemQueryResponse}>
+     */
+    @PostMapping("/releaseScene")
+    @ControllerPointCut
+    @SneakyThrows
+    Result<TechriskInnovateMpcpromoSceneReleaseResponse> releaseScene(@RequestBody TechriskInnovateMpcpromoSceneReleaseModel sceneReleaseModel) {
+
+        log.info("/api/promo/releaseScene POST request, sceneReleaseModel = {}", JSON.toJSONString(sceneReleaseModel));
+        return Result.success(promoService.releaseScene(sceneReleaseModel));
+
+    }
+
+    /**
+     * 小程序云个性化推荐商品数据删除接口
+     *
+     * @param dataDeleteModel 删除场景商品模型
+     * @return {@link Result}<{@link TechriskInnovateMpcpromoItemQueryResponse}>
+     */
+    @PostMapping("/deleteData")
+    @ControllerPointCut
+    @SneakyThrows
+    Result<TechriskInnovateMpcpromoDataDeleteResponse> deleteData(@RequestBody TechriskInnovateMpcpromoDataDeleteModel dataDeleteModel) {
+
+        log.info("/api/promo/dataDeleteModel POST request, dataDeleteModel = {}", JSON.toJSONString(dataDeleteModel));
+        return Result.success(promoService.deleteData(dataDeleteModel));
+
+    }
+
+    /**
+     * 小程序云个性化推荐用户行为上报接口
+     *
+     * @param behaviorSyncModel 删除场景商品模型
+     * @return {@link Result}<{@link TechriskInnovateMpcpromoItemQueryResponse}>
+     */
+    @PostMapping("/syncBehavior")
+    @ControllerPointCut
+    @SneakyThrows
+    Result<TechriskInnovateMpcpromoBehaviorSyncResponse> syncBehavior(@RequestBody TechriskInnovateMpcpromoBehaviorSyncModel behaviorSyncModel) {
+
+        log.info("/api/promo/syncBehavior POST request, behaviorSyncModel = {}", JSON.toJSONString(behaviorSyncModel));
+        return Result.success(promoService.syncBehavior(behaviorSyncModel));
+
+    }
+
+    /**
+     * 小程序云个性化推荐上传数据接口-JSON格式
+     *
+     * @param dataSyncModelString 数据同步模型-JSONString格式
+     * @return {@link Result}<{@link TechriskInnovateMpcpromoDataSyncResponse}>
+     */
+    @PostMapping("/syncData/json")
+    @ControllerPointCut
+    @SneakyThrows
+    Result<TechriskInnovateMpcpromoDataSyncResponse> syncData(@RequestBody JSONObject dataSyncModelString) {
+
+        log.info("/api/promo/syncData POST request, dataSyncModelString = {}", JSON.toJSONString(dataSyncModelString));
+        return Result.success(promoService.syncData(dataSyncModelString.toJSONString()));
+
+    }
+
+    /**
+     * 小程序云个性化推荐场景创建接口-JSON格式
+     *
+     * @param sceneCreateModelString 场景创建模型-JSONString格式
+     * @return {@link Result}<{@link TechriskInnovateMpcpromoSceneCreateResponse}>
+     */
+    @PostMapping("/createScene/json")
+    @ControllerPointCut
+    @SneakyThrows
+    Result<TechriskInnovateMpcpromoSceneCreateResponse> createScene(@RequestBody JSONObject sceneCreateModelString) {
+
+        log.info("/api/promo/createScene POST request, sceneCreateModelString = {}", JSON.toJSONString(sceneCreateModelString));
+        return Result.success(promoService.createScene(sceneCreateModelString.toJSONString()));
+
+    }
+
+    /**
+     * 小程序云个性化推荐推荐查询接口-JSON格式
+     *
+     * @param itemQueryModelString 项目查询模型-JSONString格式
+     * @return {@link Result}<{@link TechriskInnovateMpcpromoItemQueryResponse}>
+     */
+    @PostMapping("/queryItem/json")
+    @ControllerPointCut
+    @SneakyThrows
+    Result<TechriskInnovateMpcpromoItemQueryResponse> queryItem(@RequestBody JSONObject itemQueryModelString) {
+
+        log.info("/api/promo/queryItem POST request, itemQueryModelString = {}", JSON.toJSONString(itemQueryModelString));
+        return Result.success(promoService.queryItem(itemQueryModelString.toJSONString()));
+
+    }
+
+    /**
+     * 小程序云个性化推荐场景中商品删除接口-JSON格式
+     *
+     * @param sceneReleaseModelString 删除场景商品模型-JSONString格式
+     * @return {@link Result}<{@link TechriskInnovateMpcpromoItemQueryResponse}>
+     */
+    @PostMapping("/releaseScene/json")
+    @ControllerPointCut
+    @SneakyThrows
+    Result<TechriskInnovateMpcpromoSceneReleaseResponse> releaseScene(@RequestBody JSONObject sceneReleaseModelString) {
+
+        log.info("/api/promo/releaseScene POST request, sceneReleaseModelString = {}", JSON.toJSONString(sceneReleaseModelString));
+        return Result.success(promoService.releaseScene(sceneReleaseModelString.toJSONString()));
+
+    }
+
+    /**
+     * 小程序云个性化推荐商品数据删除接口-JSON格式
+     *
+     * @param dataDeleteModelString 删除场景商品模型
+     * @return {@link Result}<{@link TechriskInnovateMpcpromoItemQueryResponse}>
+     */
+    @PostMapping("/deleteData/json")
+    @ControllerPointCut
+    @SneakyThrows
+    Result<TechriskInnovateMpcpromoDataDeleteResponse> deleteData(@RequestBody JSONObject dataDeleteModelString) {
+
+        log.info("/api/promo/dataDeleteModel POST request, dataDeleteModelString = {}", JSON.toJSONString(dataDeleteModelString));
+        return Result.success(promoService.deleteData(dataDeleteModelString.toJSONString()));
+
+    }
+
+    /**
+     * 小程序云个性化推荐用户行为上报接口-JSON格式
+     *
+     * @param behaviorSyncModelString 删除场景商品模型
+     * @return {@link Result}<{@link TechriskInnovateMpcpromoItemQueryResponse}>
+     */
+    @PostMapping("/syncBehavior/json")
+    @ControllerPointCut
+    @SneakyThrows
+    Result<TechriskInnovateMpcpromoBehaviorSyncResponse> syncBehavior(@RequestBody JSONObject behaviorSyncModelString) {
+
+        log.info("/api/promo/syncBehavior POST request, behaviorSyncModelString = {}", JSON.toJSONString(behaviorSyncModelString));
+        return Result.success(promoService.syncBehavior(behaviorSyncModelString.toJSONString()));
 
     }
 
