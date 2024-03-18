@@ -122,6 +122,9 @@ public class CloudDebugTestController {
             log.error("get http request body fail, e = {}", e.getMessage(), e);
         }
 
+        log.info("receive http request body: " +  httpRequestInfo);
+
+
         return httpRequestInfo;
 
     }
